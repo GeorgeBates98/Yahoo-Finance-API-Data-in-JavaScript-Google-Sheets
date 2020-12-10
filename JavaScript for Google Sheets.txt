@@ -1,0 +1,37 @@
+function callAPI(symbol) { 
+  
+  // Call the API 
+  var url = 'https://query2.finance.yahoo.com/v10/finance/quoteSummary/'
+  var modules = "?modules=financialData"
+  var response = UrlFetchApp.fetch(url + symbol + modules);
+    
+  // Parse the JSON reply
+  var json = response.getContentText();
+  var data = JSON.parse(json);
+  console.log(data)
+  return JSON.parse(json)
+}
+
+
+function displayFinancials() {
+  
+  // Load sheets
+  var dataSheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("Results"); 
+  
+  // Get model input data
+  var company = "Apple"
+  var symbol = "AAPL"
+  
+  // call the API
+  var api = callAPI(symbol);
+  var results = api.quoteSummary.result[0].financialData; 
+  
+  // Output the API result
+  var output = [company, symbol, results.debtToEquity.fmt] 
+
+  console.log(output);
+
+
+  dataSheet.appendRow(output)
+  
+}
