@@ -1,1 +1,1 @@
-# Yahoo-Finance-API-Data-in-JavaScript-Google-Sheets-
+# Yahoo-Finance-API-Data-in-JavaScript-Google-Sheets
